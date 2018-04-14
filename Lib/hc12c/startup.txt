@@ -1,0 +1,57 @@
+All startup c files do have identical code. The main c file is start12.c,
+which is copied to the other file names. The identical c files are afterwards
+compiled with different options to obtain specific object files for
+SMALL/BANKED memory model and for C/C++ global constructor calls.
+
+Note: In the small and banked memory model, the startup code only handles non far data
+(e.g. variables in the 16 bit address space). To initialize far/paged variables in these memory models,
+the startup code has to be adapted. The startup code has to expect and handle far data,
+as it is done for the large memory model. In the ELF object file format, the linker does
+automatically detect, that the startup code expects far data. In the HIWARE object file format,
+the directive HAS_BANKED_DATA has to be used.
+Consider also the manual entry for far data in the Linker.
+
+The following files are delivered:
+
+start12.c        The main, recommended startup code. This startup code is optimized for code size and execution speed.
+                 Reference for all c files of the startup code.
+                 All start*.c files are identical to this file.
+                 Derive your own startup code from it.
+
+startup.c        C implementation of the startup code. Implements also the initialization of
+                 ROM libraries, which is not implemented in start12.c.
+                 This file shows how the startup information is provided for a C implementation.
+
+start12.h        Declaration of startup structures. Be careful and read the
+                 notes in this file before changing it or a copy of it
+
+
+The usual way is to add the start12.c to your project. However for compatibility, precompiled startup code is also delivered:
+
+File            Core        Memory Model          Support for C++ global init     Command line
+
+start12s.o      HC12/HCS12  SMALL memory model    no C++ constructor calls        start12.c -ms -objn=start12s.o
+start12b.o      HC12/HCS12  BANKED memory model   no C++ constructor calls        start12.c -mb -objn=start12b.o
+start12l.o      HC12/HCS12  LARGE memory model    no C++ constructor calls        start12.c -ml -objn=start12l.o
+strt12sp.o      HC12/HCS12  SMALL memory model    supports C++ constructor calls  start12.c -ms -objn=strt12sp.o
+strt12bp.o      HC12/HCS12  BANKED memory model   supports C++ constructor calls  start12.c -mb -objn=strt12bp.o
+strt12lp.o      HC12/HCS12  LARGE memory model    supports C++ constructor calls  start12.c -ml -objn=strt12lp.o
+start12xs.o     HCS12X      SMALL memory model    no C++ constructor calls        start12.c -ms -cpuhcs12x -CpDirect0xF000 -objn=start12xs.o
+start12xb.o     HCS12X      BANKED memory model   no C++ constructor calls        start12.c -mb -cpuhcs12x -CpDirect0xF000 -objn=start12xb.o
+start12xl.o     HCS12X      LARGE memory model    no C++ constructor calls        start12.c -ml -cpuhcs12x -CpDirect0xF000 -objn=start12xl.o
+start12xsp.o    HCS12X      SMALL memory model    supports C++ constructor calls  start12.c -ms -cpuhcs12x -CpDirect0xF000 -objn=start12xsp.o
+start12xbp.o    HCS12X      BANKED memory model   supports C++ constructor calls  start12.c -mb -cpuhcs12x -CpDirect0xF000 -objn=start12xbp.o
+start12xlp.o    HCS12X      LARGE memory model    supports C++ constructor calls  start12.c -ml -cpuhcs12x -CpDirect0xF000 -objn=start12xlp.o
+start12xlnj.o   HCS12X      LARGE memory model    no C++ constructor calls        start12.c -ml -cpuhcs12x -CpDirect0xF000 -objn=start12xlnj.o -NonConstQualiNear -Onb=b
+start12xlpnj.o  HCS12X      LARGE memory model    supports C++ constructor calls  start12.c -ml -cpuhcs12x -CpDirect0xF000 -objn=start12xlpnj.o -NonConstQualiNear -Onb=b
+start12xlcj.o   HCS12X      LARGE memory model    no C++ constructor calls        start12.c -ml -cpuhcs12x -CpDirect0xF000 -objn=start12xlcj.o -ConstQualiNear -Onb=b
+start12xlpcj.o  HCS12X      LARGE memory model    supports C++ constructor calls  start12.c -ml -cpuhcs12x -CpDirect0xF000 -objn=start12xlpcj.o -ConstQualiNear -Onb=b
+start12xsj.o    HCS12X      SMALL memory model    no C++ constructor calls        start12.c -ms -cpuhcs12x -CpDirect0xF000 -objn=start12xsj.o -Onb=b
+start12xbj.o    HCS12X      BANKED memory model   no C++ constructor calls        start12.c -mb -cpuhcs12x -CpDirect0xF000 -objn=start12xbj.o -Onb=b
+start12xlj.o    HCS12X      LARGE memory model    no C++ constructor calls        start12.c -ml -cpuhcs12x -CpDirect0xF000 -objn=start12xlj.o -Onb=b
+start12xspj.o   HCS12X      SMALL memory model    supports C++ constructor calls  start12.c -ms -cpuhcs12x -CpDirect0xF000 -objn=start12xspj.o -Onb=b
+start12xbpj.o   HCS12X      BANKED memory model   supports C++ constructor calls  start12.c -mb -cpuhcs12x -CpDirect0xF000 -objn=start12xbpj.o -Onb=b
+start12xlpj.o   HCS12X      LARGE memory model    supports C++ constructor calls  start12.c -ml -cpuhcs12x -CpDirect0xF000 -objn=start12xlpj.o -Onb=b
+
+
+Metrowerks

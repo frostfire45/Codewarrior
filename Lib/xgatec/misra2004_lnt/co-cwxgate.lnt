@@ -1,0 +1,123 @@
+/*************************************************************************************************************
+*
+*  MISRA-2004 compliancy of the XGATE library
+*  Target-specific configuration options
+*
+**************************************************************************************************************/
+
+/*************************************************************************************************************
+*  Inline assembly
+**************************************************************************************************************/
+
+-d__asm=_to_semi +rw(_to_semi)         /* accept (and ignore) single-line HLI statements (e.g. __asm JMP main) */
+-dasm=_to_brackets +rw(_to_brackets)   /* accept (and ignore) multi-line HLI statements (e.g. asm {...})       */
+
+/*************************************************************************************************************
+*  Type modifiers
+**************************************************************************************************************/
+
+-d__near=near               /* allow both "near" and "__near"                        */
+-d__far=far                 /* allow both "far" and "__far"                          */
+-esym(950, near)            /* accept non-ANSI reserved word "near"                  */
+-esym(950, far)             /* accept non-ANSI reserved word "far"                   */
+-d__va_sizeof__=sizeof      /* accept architecture-specific operator '__va_sizeof__' */
++fem                        /* allow early modifiers (e.g. __far int *x)          */
+
+/*************************************************************************************************************
+*  Interrupt functions
+**************************************************************************************************************/
+
+-dinterrupt=
+
+/*************************************************************************************************************
+*  Data type formats
+**************************************************************************************************************/
+
++fcu        /* plain type 'char' is unsigned         */
+-sc1        /* sizeof(char) is 1                     */
+-ss2        /* sizeof(short) is 2                    */
+-si2        /* sizeof(int) is 2                      */
+-sl4        /* sizeof(long) is 4                     */
+-sll4       /* sizeof(long long) is 4                */
+-sf4        /* sizeof(float) is 4                    */
+-sd4        /* sizeof(double) is 4                   */
+-sld4       /* sizeof(long double) is 4              */
+
+-spD2       /* sizeof(default data pointer) is 2     */
+-spP2       /* sizeof(default function pointer) is 2 */
+
+/*************************************************************************************************************
+*  Standard arguments
+**************************************************************************************************************/
+
+-emacro(927, va_start)      /* suppress, for 'va_start', the message on cast being made to convert a char pointer to a non-char pointer */
+-emacro(826, va_start)      /* suppress, for 'va_start', the message on suspicious pointer conversion (area too small)                  */
+-emacro(927, va_arg)	      /* suppress, for 'va_arg', the message on cast being made to convert a char pointer to a non-char pointer   */
+-emacro(826, va_arg)        /* suppress, for 'va_arg', the message on suspicious pointer conversion (area too small)                    */
+
+/*************************************************************************************************************
+*  Compiler built-in macros
+**************************************************************************************************************/
+
+-d__STDC__=0
+
+-d__OPTIMIZE_FOR_SIZE__
+
+-d__CHAR_IS_8BIT__
+-d__CHAR_IS_UNSIGNED__           
+-d__WCHAR_T_IS_UCHAR__
+-d__INT_IS_16BIT__
+-d__SHORT_IS_16BIT__
+-d__ENUM_IS_16BIT__
+-d__ENUM_IS_SIGNED__
+-d__LONG_IS_32BIT__
+-d__LONG_LONG_IS_32BIT__
+-d__VTAB_DELTA_IS_16BIT__
+-d__SIZE_T_IS_UINT__
+-d__PTRDIFF_T_IS_INT__
+-d__PTR_SIZE_2__
+-d__PTRMBR_OFFSET_IS_16BIT__
+-d__FLOAT_IS_IEEE32__
+-d__DOUBLE_IS_IEEE32__
+-d__LONG_DOUBLE_IS_IEEE32__
+-d__LONG_LONG_DOUBLE_IS_IEEE32__
+
+-d__SICG__
+
+-d__PLAIN_BITFIELD_IS_SIGNED__
+-d__BITFIELD_LSBIT_FIRST__
+-d__BITFIELD_MSBYTE_FIRST__
+-d__BITFIELD_MSWORD_FIRST__
+-d__BITFIELD_TYPE_SIZE_REDUCTION__=
+
+-d__BIG_ENDIAN__
+
+-d__ELF_OBJECT_FILE_FORMAT__
+
+-d__SMALL__
+
+-d__XGATE__
+-d__VERSION__=5008
+-d__VERSION_STR__="V-5.0.8"
+-d__MWERKS__=1
+-d__HIWARE__
+-d__PRODUCT_HICROSS_PLUS__
+
+/*************************************************************************************************************
+*  Miscellaneous
+**************************************************************************************************************/
+
+-cwh            /* allow for @far and @hex-constant                           */
+-e652	          /* suppress the message about #define of earlier declared symbols */
++fpc            /* pointer casts are lvalues */
+
+/* 
+ * the following functions exhibit variable return modes
+ * (that is, they may equally-usefully be called for a value
+ * as called just for their effects); accordingly we inhibit
+ * Warning 534 for these functions
+ */
+-esym(534,close,creat,fclose,fprintf,fputc)
+-esym(534,fputs,fscanf,fseek,fwrite,lseek,memcpy,memmove,memset)
+-esym(534,printf,puts,scanf,sprintf,sscanf,strcat,strcpy)
+-esym(534,strncat,strncpy,unlink,write)

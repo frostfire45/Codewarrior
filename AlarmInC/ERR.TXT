@@ -1,0 +1,10 @@
+
+>> in "C:\Users\Frost\Documents\GitHub\Codewarrior\AlarmInC\Sources\main.c", line 3, col 10, pos 127
+#include <mc9s12dg256.h>     /* derivative information */
+         ^
+ERROR C5200: mc9s12dg256.h file not found
+
+>> in "C:\Users\Frost\Documents\GitHub\Codewarrior\AlarmInC\Sources\main.c", line 6, col 10, pos 233
+#include "main_asm.h" /* interface to the assembly module */ 
+         ^
+ERROR C5200: main_asm.h file not found

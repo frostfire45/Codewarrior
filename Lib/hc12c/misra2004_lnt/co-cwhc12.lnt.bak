@@ -1,0 +1,113 @@
+/*************************************************************************************************************
+*
+*  MISRA-2004 compliancy of the S12(X) library
+*  Target-specific configuration options
+*
+**************************************************************************************************************/
+
+/*************************************************************************************************************
+*  Inline assembly
+**************************************************************************************************************/
+
+-d__asm=_to_semi +rw(_to_semi)         /* accept (and ignore) single-line HLI statements (e.g. __asm JMP main) */
+-dasm=_to_brackets +rw(_to_brackets)   /* accept (and ignore) multi-line HLI statements (e.g. asm {...})       */
+
+/*************************************************************************************************************
+*  Type modifiers
+**************************************************************************************************************/
+
+-d__near=near               /* allow both "near" and "__near"                        */
+-d__far=far                 /* allow both "far" and "__far"                          */
+-esym(950, near)            /* accept non-ANSI reserved word "near"                  */
+-esym(950, far)             /* accept non-ANSI reserved word "far"                   */
+-d__va_sizeof__=sizeof      /* accept architecture-specific operator '__va_sizeof__' */
+-d__alignof__=sizeof        /* accept architecture-specific operator '__alignof__' */
++fem                        /* allow early modifiers (e.g. __far int *x)          */
+
+/*************************************************************************************************************
+*  Data type formats
+**************************************************************************************************************/
+
+-sc1        /* sizeof(char) is 1                     */
+-ss2        /* sizeof(short) is 2                    */
+-si2        /* sizeof(int) is 2                      */
+-sl4        /* sizeof(long) is 4                     */
+-sll4       /* sizeof(long long) is 4                */
+
+/*************************************************************************************************************
+*  Standard arguments
+**************************************************************************************************************/
+
+-emacro(927, va_start)      /* suppress, for 'va_start', the message on cast being made to convert a char pointer to a non-char pointer */
+-emacro(826, va_start)      /* suppress, for 'va_start', the message on suspicious pointer conversion (area too small)                  */
+-emacro(927, va_arg)	      /* suppress, for 'va_arg', the message on cast being made to convert a char pointer to a non-char pointer   */
+-emacro(826, va_arg)        /* suppress, for 'va_arg', the message on suspicious pointer conversion (area too small)                    */
+
+/*************************************************************************************************************
+*  Compiler built-in macros
+**************************************************************************************************************/
+
+-d__SIZE_T_IS_UINT__
+-d__PTRDIFF_T_IS_INT__
+-d__STDC__=0
+
+-d__OPTIMIZE_FOR_SIZE__
+
+-d__CHAR_IS_8BIT__            
+-d__CHAR_IS_SIGNED__
+-d__WCHAR_T_IS_UCHAR__
+-d__INT_IS_16BIT__
+-d__SHORT_IS_16BIT__
+-d__ENUM_IS_16BIT__
+-d__ENUM_IS_SIGNED__
+-d__LONG_IS_32BIT__
+-d__LONG_LONG_IS_32BIT__
+-d__VTAB_DELTA_IS_16BIT__
+-d__PTRMBR_OFFSET_IS_16BIT__
+
+-d__PLAIN_BITFIELD_IS_SIGNED__
+-d__BITFIELD_LSBIT_FIRST__
+-d__BITFIELD_MSBYTE_FIRST__
+-d__BITFIELD_MSWORD_FIRST__
+-d__BITFIELD_TYPE_SIZE_REDUCTION__=
+-d__BIG_ENDIAN__
+
+-d__RPAGE_ADR__=0x0016
+-d__DPAGE_ADR__=0x0034
+-d__GPAGE_ADR__=0x0010
+
+-d__NO_DPAGE__
+-d__NO_EPAGE__
+-d__NO_GPAGE__
+-d__NO_PPAGE__
+-d__NO_RPAGE__
+
+-d__ELF_OBJECT_FILE_FORMAT__
+
+-d__HC12__      
+-d__MWERKS__=1
+-d__VERSION__=5038
+-d__VERSION_STR__="V-5.0.38beta 2"
+-d__HIWARE__
+-d__PRODUCT_HICROSS_PLUS__
+-d__NOT_PROCESSOR_X4__
+
+/*************************************************************************************************************
+*  Miscellaneous
+**************************************************************************************************************/
+
+-cwh        /* allow for @far and @hex-constant                           */
+-e652	      /* suppress the message about #define of earlier declared symbols */
+-e146       /* allow binary constants */
++fpc        /* pointer casts are lvalues */
+
+/* 
+ * the following functions exhibit variable return modes
+ * (that is, they may equally-usefully be called for a value
+ * as called just for their effects); accordingly we inhibit
+ * Warning 534 for these functions
+ */
+-esym(534,close,creat,fclose,fprintf,fputc)
+-esym(534,fputs,fscanf,fseek,fwrite,lseek,memcpy,memmove,memset)
+-esym(534,printf,puts,scanf,sprintf,sscanf,strcat,strcpy)
+-esym(534,strncat,strncpy,unlink,write)

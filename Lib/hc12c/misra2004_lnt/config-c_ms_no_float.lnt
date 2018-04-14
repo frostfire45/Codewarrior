@@ -1,0 +1,25 @@
+/******************************************************************************************
+*
+*  C Ms no float - Configuration options
+*
+******************************************************************************************/
+
+-d__CONST_PTR_SIZE_2__
+-d__FLOAT_IS_IEEE32__
+-d__DOUBLE_IS_IEEE32__
+-d__PTR_SIZE_2__
+-d__EPAGE_ADR__=0x0036
+-d__LONG_DOUBLE_IS_IEEE32__
+-d__LONG_LONG_DOUBLE_IS_IEEE32__
+-d__DIRECT_ADR__=0
+-d__PPAGE_ADR__=0x0035
+-d__SMALL__
+
+-sf4      /* sizeof(float) is 4 */
+-sd4      /* sizeof(double) is 4 */
+-sld4     /* sizeof(long double) is 4 */
+
+-spD2     /* sizeof(default data pointer) is 2 */
+-spP2     /* sizeof(default function pointer) is 2 */
+-spN2     /* sizeof(near pointer) is 2 */
+-spF2     /* sizeof(far pointer) is 3 */

@@ -1,0 +1,34 @@
+XGATE Startup
+
+The XGATE core can only access RAM memory and registers. It cannot directly run from Flash.
+Therefore on real target application there is always a HC12 part which is responsible for the XGATE setup.
+During debugging also a "RAM only" "XGATE only" setup exists in which the debugger basically takes over the job of the HC12.
+So the debugger loads the code into the RAM and the debugger must also be instructed with command files to enable and configure the XGATE module.
+
+1- DEBUG XGATE only RAM setup
+   - Scenario:
+     - the debugger loads the XGATE application directly into RAM.
+     - a debugger command file script executes the necessary XGATE initializations.
+
+   This is the most basic, most simple setup and therefore a good starter. However this setup does require the debugger to
+   be attached to the target and therefore as soon as the XGATE code behaves as expected a switch to the setup 2 will be necessary anyway.
+
+2- HCS12X/XGATE mixed setup
+   - Scenario:
+     - the normal HC12 startup code performs the usual HC12 startup sequence
+     - the HC12 copies the XGATE code from flash to RAM
+     - the HC12 sets the XGATE vector table up
+     - the HC12 initializes the XGATE registers
+     - the HC12 enables the XGATE
+
+   The simplest setup for this scenario is to link XGATE and HC12 code together into one single application. Then a special HC12 part of this application
+   takes over the above steps.
+   Note: See the linker manuals RELOCATE_TO (or one of our examples) how to get debug info working for the XGATE 
+   (if not done no source information for the XGATE works).
+   
+   See the "(CodeWarrior_Examples)\HCS12X\HCS12X_XGATE_SoftwareRequest" example of such a setup.
+
+
+Metrowerks
+
+

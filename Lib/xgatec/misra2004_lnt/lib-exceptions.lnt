@@ -1,0 +1,65 @@
+/*************************************************************************************************************
+*
+*  MISRA-2004 compliancy of the S12(X) library
+*  Error inhibition options
+*
+**************************************************************************************************************/
+
+/*************************************************************************************************************
+*  Exceptions to MISRA rules
+**************************************************************************************************************/
+
+/* inhibit the message on the use of a modifier or a type outside of a typedef (MISRA 6.3 ADV) */
+-e970
+
+/* allow function-like macros (MISRA 19.7 ADV) */
+-esym(961,19.7)
+
+/* allow repeatedly included header files - all the libray headers are guarded using macros (MISRA 19.15 REQ) */
+-e537
+
+/* allow multiple exit points for functions (MISRA 14.7 REQ) */
+-e904
+
+/* allow 'continue' statements (MISRA 14.5 REQ) */
+-estring(960,"continue statement detected")
+
+/* allow unions (MISRA 18.4 REQ) */
+-estring(960,"unions shall not be used")
+
+/* accept several deprecated symbols (MISRA 20.4 REQ, 20.5 REQ) */
+-esym(586,errno)
+-esym(586,abort)
+-esym(586,malloc)
+-esym(586,free)
+
+/*************************************************************************************************************
+*  Miscellaneous
+**************************************************************************************************************/
+
+/* inhibit PC-Lint error #95 (all occurences of this error across the library refer to object-like macros) */
+-e95                       
+
+/* inhibit message on non-ANSI reserved word "_to_semi" */
+-esym(950,_to_semi)
+
+/* inhibit message on non-ANSI reserved word "_to_brackets" */
+-esym(950,_to_brackets)
+
+/* inhibit message on non-ANSI reserved word "_gobble" */
+-esym(950,_gobble)
+
+/* inhibit the helper messages on location information reporting */
+-e830 -e831
+
+/* allow more than 32 (ANSI/ISO limit) parenthesis pairs in an expression */
+-"esym(793,parens in expression)"
+
+/* allow more than 6 (ANSI/ISO limit) external identifiers */
+-"esym(793,external identifiers)"
+
+/* allow taking the address of a near auto variable (this is not a dynamically linked library) */
+-e934
+
+/* allow the use of header file 'stdio.h' */
+-esym(829,stdio.h)
