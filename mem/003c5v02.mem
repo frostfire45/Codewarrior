@@ -1,0 +1,9 @@
+;personality file for MC68H12GA32
+
+D  0000  01FF  MEMORY_TOP
+A  0800  0FFF  MEMORY_RAM
+N  1C00  1FFF  MEMORY_EEPROM
+A  8000  FFFF  FLASH
+E  FFFE        MEMORY_RESET
+V Alpha 0.0
+I 0000                board ID number (N/A)

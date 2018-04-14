@@ -1,0 +1,9 @@
+;personality file for MC68HC912DG128 EVB
+
+D  0000  03FF  MEMORY_TOP
+N  0800  0FFF  MEMORY_EEPROM
+A  2000  3FFF  MEMORY_RAM
+A  4000  FFFF  FLASH
+E  FFFE        MEMORY_RESET
+V Alpha 0.1
+I 0000                board ID number (N/A)

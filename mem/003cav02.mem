@@ -1,0 +1,8 @@
+;personality file for MC9S12A256B
+
+D  0000  03FF  MEMORY_TOP
+A  1000  3FFF  MEMORY_RAM
+A  4000  FFFF  FLASH
+E  FFFE        MEMORY_RESET
+V Alpha 0.1
+I 0000                board ID number (N/A)

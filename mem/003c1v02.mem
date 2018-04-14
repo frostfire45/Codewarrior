@@ -1,0 +1,9 @@
+;personality file for MC68HC912B32
+
+D  0000  01FF  MEMORY_TOP
+A  0800  0BFF  MEMORY_RAM
+N  0D00  0FFF  MEMORY_EEPROM
+A  8000  FFFF  FLASH 
+E  FFFE        MEMORY_RESET
+V Alpha 0.0
+I 0000                board ID number (N/A)

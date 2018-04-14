@@ -1,0 +1,19 @@
+
+;personality file for DaVinci M68HC708XL36 board
+
+
+D   00    4F    PRU or TOP   TOP board resource or the PRU
+A   50   44F    RAM
+C  450  6DFF    NONE
+B 6E00  FDFF    ROM
+D FE00  FE0F    PRU or TOP   TOP board resource or the PRU
+C FE10  FFDF    NONE
+B FFE0  FFFF    ROM
+F FFFF  FFFF    special ram for cop
+E FFFE                reset vector
+H 00411V??.HLP        chip help file name
+V Alpha 1.0           version of this file
+I 0011                board ID number
+T 0             none
+J F100                base address for '08code - default F100
+S105F135202094     dummy cop record

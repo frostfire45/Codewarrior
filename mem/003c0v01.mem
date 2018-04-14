@@ -1,0 +1,10 @@
+;personality file for MC68H12A4 EVB
+
+D  0000  01FF  MEMORY_TOP
+A  0800  0BFF  MEMORY_RAM
+N  1000  1FFF  MEMORY_EEPROM
+A  8000  FFFF  MEMORY_RAM
+D  FFC0  FFFF  MEMORY_TOP
+E  FFFE        MEMORY_RESET
+V Alpha 0.1
+I 0000                board ID number (N/A)
